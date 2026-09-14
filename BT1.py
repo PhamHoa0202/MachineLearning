@@ -1,4 +1,10 @@
 import pandas as pd
+import numpy as np
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_squared_error
+
 data = { 
     "DienTich": [30,40,50,60,70,80,90,100,110,120,
                  45,55,75,95,105,65,85,35,115,125],
@@ -17,3 +23,37 @@ print(df)
 
 x = df[["DienTich", "PhongNgu", "KhoangCach"]]
 y = df["Gia"]
+
+#Chia tập train/test
+X_train, X_test, y_train, y_test = train_test_split(
+    x,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+print("\n===== TRAIN / TEST =====")
+print("Train:", len(X_train))
+print("Test :", len(X_test))
+
+#
+model_linear = LinearRegression()
+
+model_linear.fit(X_train, y_train)
+
+y_train_pred = model_linear.predict(X_train)
+y_test_pred = model_linear.predict(X_test)
+
+print("\n Hồi quy")
+
+print("Train R2:",
+      r2_score(y_train, y_train_pred))
+
+print("Test R2:",
+      r2_score(y_test, y_test_pred))
+
+print("Train RMSE:",
+      np.sqrt(mean_squared_error(y_train, y_train_pred)))
+
+print("Test RMSE:",
+      np.sqrt(mean_squared_error(y_test, y_test_pred)))
