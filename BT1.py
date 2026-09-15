@@ -57,3 +57,37 @@ print("Train RMSE:",
 
 print("Test RMSE:",
       np.sqrt(mean_squared_error(y_test, y_test_pred)))
+
+# ==========================================
+# 5. TAO MO HINH POLYNOMIAL
+# ==========================================
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
+
+# Tao mo hinh Polynomial bac 10
+model_overfit = Pipeline([
+    ("poly", PolynomialFeatures(degree=10)),
+    ("linear", LinearRegression())
+])
+
+# Huấn luyện mô hình
+model_overfit.fit(X_train, y_train)
+
+# Dự đoán tập Train và Test
+y_train_overfit = model_overfit.predict(X_train)
+y_test_overfit = model_overfit.predict(X_test)
+
+print("\n===== POLYNOMIAL DEGREE 10 =====")
+
+print("Train R2:",
+      r2_score(y_train, y_train_overfit))
+
+print("Test R2:",
+      r2_score(y_test, y_test_overfit))
+
+print("Train RMSE:",
+      np.sqrt(mean_squared_error(y_train, y_train_overfit)))
+
+print("Test RMSE:",
+      np.sqrt(mean_squared_error(y_test, y_test_overfit)))
