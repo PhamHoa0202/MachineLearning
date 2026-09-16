@@ -26,7 +26,7 @@ y = df["Gia"]
 #Chia tập train/test
 X_train, X_test, y_train, y_test = train_test_split(x,y,test_size=0.2,random_state=42)
 
-print("\n===== TRAIN / TEST =====")
+print("\nTRAIN / TEST")
 print("Train:", len(X_train))
 print("Test :", len(X_test))
 model_linear = LinearRegression()
@@ -59,10 +59,8 @@ print("Train RMSE:",np.sqrt(mean_squared_error(y_train, y_train_overfit)))
 print("Test RMSE:",np.sqrt(mean_squared_error(y_test, y_test_overfit)))
 
 print("\nSO SANH CAC BAC")
-
 for degree in [1, 2, 3, 5, 10]:
     model = Pipeline([("poly", PolynomialFeatures(degree=degree)), ("linear", LinearRegression())])
-
     # Huấn luyện
     model.fit(X_train, y_train)
     # Dự đoán
@@ -82,7 +80,6 @@ for degree in [1, 2, 3, 5, 10]:
         "| Test RMSE:", round(test_rmse, 4)
     )
 #K-FOLD CROSS VALIDATION
-
 from sklearn.model_selection import KFold, cross_val_score
 # Chia dữ liệu thành 5 phần
 kf = KFold(n_splits=5,shuffle=True, random_state=4 )
@@ -95,7 +92,6 @@ for degree in [1, 2, 3, 5, 10]:
     rmse = -scores
     print("Degree:", degree, "| RMSE tung Fold:", np.round(rmse, 4),  "| RMSE trung binh:",round(rmse.mean(), 4))
 #TIM MO HINH TOT NHAT
-
 from sklearn.model_selection import GridSearchCV
 model = Pipeline([ ("poly", PolynomialFeatures()),("linear", LinearRegression())])
 
@@ -111,11 +107,7 @@ print("\n===== MO HINH TOT NHAT =====")
 print("Degree tot nhat:",grid.best_params_["poly__degree"])
 print( "RMSE tot nhat:", round(-grid.best_score_, 4))
 #Du DOAN CAN NHA MOI
-new_house = pd.DataFrame({
-    "DienTich": [50],
-    "PhongNgu": [2],
-    "KhoangCach": [8]
-})
+new_house = pd.DataFrame({"DienTich": [50],"PhongNgu": [2],"KhoangCach": [8]})
 
 # Lấy mô hình tốt nhất
 best_model = grid.best_estimator_
