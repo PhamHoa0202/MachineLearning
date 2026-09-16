@@ -45,7 +45,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
 
 # Tao mo hinh Polynomial bac 10
-model_overfit = Pipeline([ ("poly", PolynomialFeatures(degree=10)), ("linear", LinearRegression()])
+model_overfit = Pipeline([ ("poly", PolynomialFeatures(degree=10)), ("linear", LinearRegression())])
 # Huấn luyện mô hình
 model_overfit.fit(X_train, y_train)
 # Dự đoán tập Train và Test
@@ -128,7 +128,4 @@ print("Dien tich   :", 50)
 print("Phong ngu   :", 2)
 print("Khoang cach :", 8)
 
-print(
-    "Gia du doan :",
-    round(prediction[0], 4)
-)
+print("Gia du doan :",round(prediction[0], 4))
