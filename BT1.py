@@ -93,7 +93,7 @@ param_grid = { "poly__degree": [1, 2, 3, 5, 10]}
 grid = GridSearchCV( model, param_grid, cv=kf, scoring="neg_root_mean_squared_error")
 # huan luyen
 grid.fit(X, y)
-print("\n===== MO HINH TOT NHAT =====")
+print("\nMo hinh tot nhat")
 print("Degree tot nhat:",grid.best_params_["poly__degree"])
 print( "RMSE tot nhat:", round(-grid.best_score_, 4))
 #Du doan can nha moi
@@ -105,7 +105,7 @@ best_model = grid.best_estimator_
 best_model.fit(X, y)
 # du doan
 prediction = best_model.predict(new_house)
-print("\n===== DU DOAN GIA NHA =====")
+print("\nDu doan gia nha")
 print("Dien tich   :", 50)
 print("Phong ngu   :", 2)
 print("Khoang cach :", 8)
